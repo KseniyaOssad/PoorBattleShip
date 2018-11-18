@@ -1,0 +1,14 @@
+C:\Users\KSENA\source\repos\lab2_00P_Osad\lab2_00P_Osad\bin\Debug\lab2_00P_Osad.exe.config
+C:\Users\KSENA\source\repos\lab2_00P_Osad\lab2_00P_Osad\bin\Debug\lab2_00P_Osad.exe
+C:\Users\KSENA\source\repos\lab2_00P_Osad\lab2_00P_Osad\bin\Debug\lab2_00P_Osad.pdb
+C:\Users\KSENA\source\repos\lab2_00P_Osad\lab2_00P_Osad\obj\Debug\lab2_00P_Osad.csprojAssemblyReference.cache
+C:\Users\KSENA\source\repos\lab2_00P_Osad\lab2_00P_Osad\obj\Debug\lab2_00P_Osad.csproj.CoreCompileInputs.cache
+C:\Users\KSENA\source\repos\lab2_00P_Osad\lab2_00P_Osad\obj\Debug\lab2_00P_Osad.exe
+C:\Users\KSENA\source\repos\lab2_00P_Osad\lab2_00P_Osad\obj\Debug\lab2_00P_Osad.pdb
+C:\Users\KSENA\source\repos\PoorBattleShip\lab2_00P_Osad\bin\Debug\lab2_00P_Osad.exe.config
+C:\Users\KSENA\source\repos\PoorBattleShip\lab2_00P_Osad\bin\Debug\lab2_00P_Osad.exe
+C:\Users\KSENA\source\repos\PoorBattleShip\lab2_00P_Osad\bin\Debug\lab2_00P_Osad.pdb
+C:\Users\KSENA\source\repos\PoorBattleShip\lab2_00P_Osad\obj\Debug\lab2_00P_Osad.csprojAssemblyReference.cache
+C:\Users\KSENA\source\repos\PoorBattleShip\lab2_00P_Osad\obj\Debug\lab2_00P_Osad.csproj.CoreCompileInputs.cache
+C:\Users\KSENA\source\repos\PoorBattleShip\lab2_00P_Osad\obj\Debug\lab2_00P_Osad.exe
+C:\Users\KSENA\source\repos\PoorBattleShip\lab2_00P_Osad\obj\Debug\lab2_00P_Osad.pdb
