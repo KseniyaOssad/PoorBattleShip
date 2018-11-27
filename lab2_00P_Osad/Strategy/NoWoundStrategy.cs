@@ -10,10 +10,23 @@ namespace lab2_00P_Osad.Strategy
 {
     public class NoWoundStrategy : IStrategy
     {
-        public  TurnInfo Shoot(Board board)
+        public TurnInfo Shoot(Board board)
         {
             Random r = new Random();
-            while (true) {
+            bool is_empty = true;
+            foreach (Point p in board.points)
+            {
+                if (p == Point.Empty)
+                {
+                    is_empty = true;
+                    break;
+                }
+                else
+                    is_empty = false;
+            }
+            if (!is_empty) return new TurnInfo() ;
+            while (true)
+            {
                 int x = r.Next(board.Count);
                 int y = r.Next(board.Count);
                 if ((board.points[x, y] != Point.Missed) && (board.points[x, y] != Point.Dead) && (board.points[x, y] != Point.DoNotPush))

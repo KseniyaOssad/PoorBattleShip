@@ -55,16 +55,15 @@ namespace lab2_00P_Osad
             {
                 int level = Convert.ToInt32(Console.ReadLine());
                 if (level != 0 && level != 1)
-                    Start();
+                    return Start();
                 else
                     return level;
             }
             catch
             {
                 Console.WriteLine("Это ж вроде как не число -_- ");
-                Start();
+                return Start();
             }
-            return 0;
         }
         private static void FillBoard(Builders.Board UserBoard)
         {
@@ -90,20 +89,6 @@ namespace lab2_00P_Osad
                 FillBoard(UserBoard);
             }
         }
-      /*  private static void FillBoard(Builders.Board UserBoard)
-        {
-            Console.WriteLine(UserBoard.ToString());
-            Console.WriteLine("Fill your board:");
-            Console.WriteLine("Enter x");
-            int x = Check(UserBoard);
-            Console.WriteLine("Enter y");
-            int y = Check(UserBoard);
-
-            Console.WriteLine(" is it full ship?");
-            int f = Check(UserBoard);
-
-            Fill(UserBoard, x, y, f);
-        }*/
 
         private static int Check(Builders.Board UserBoard)
         {
@@ -111,7 +96,7 @@ namespace lab2_00P_Osad
             try
             {
                 x = Convert.ToInt32(Console.ReadLine());
-                if(x < 0 || x >= n)
+                if (x < 0 || x >= n)
                 {
                     Console.WriteLine("Vne granizi");
                     FillBoard(UserBoard);
@@ -129,8 +114,8 @@ namespace lab2_00P_Osad
 
         private static void Fill(Builders.Board b, int count, int x, int y)
         {
-           
-           if ((x < 0 && y > 0) || (x > 0 && y < 0) || x < -count + 1 || y < -count + 1 || x > count - 1 || y > count - 1)
+
+            if ((x < 0 && y > 0) || (x > 0 && y < 0) || x < -count + 1 || y < -count + 1 || x > count - 1 || y > count - 1)
                 Console.WriteLine("error to big number!");
             else if (x >= 0 && y >= 0)
                 b.points[x, y] = Point.ALive;

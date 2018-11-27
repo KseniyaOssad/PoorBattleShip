@@ -10,8 +10,8 @@ namespace lab2_00P_Osad.Strategy
 {
     public class Bot
     {
-        public static Bot instance;
-        public Bot() { }
+        private static Bot instance;
+        private Bot() { }
         public IStrategy strategy { private get; set; }
         public static Bot getInstance()
         {
@@ -19,11 +19,12 @@ namespace lab2_00P_Osad.Strategy
                 instance = new Bot();
             return instance;
         }
-        public TurnInfo Shoot(Board board) { 
+        public TurnInfo Shoot(Board board)
+        {
             bool is_w = false;
             foreach (Point p in board.points)
             {
-                if(p == Point.Wounded)
+                if (p == Point.Wounded)
                 {
                     is_w = true;
                     break;
@@ -36,7 +37,7 @@ namespace lab2_00P_Osad.Strategy
 
             return Start(board);
         }
-        public TurnInfo Start(Board board)
+        private TurnInfo Start(Board board)
         {
             return strategy.Shoot(board);
         }

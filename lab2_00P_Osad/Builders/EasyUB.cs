@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lab2_00P_Osad.Builders
 {
-    class EasyUB : BoardBuilder
+    public class EasyUB : BoardBuilder
     {
         public override void SetName(string n)
         {

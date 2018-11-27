@@ -14,7 +14,7 @@ namespace lab2_00P_Osad.Observer
         private static Game instance;
         private static List<IObserver<bool>> observers = new List<IObserver<bool>>();
         private static List<IObserver<TurnInfo>> shotObservers = new List<IObserver<TurnInfo>>();
-        public Game() { }
+        private Game() { }
         public static Game getInstance()
         {
             if (instance == null)
@@ -31,32 +31,37 @@ namespace lab2_00P_Osad.Observer
             x = Fill_x(usb.Count);//проверка на нормальное хождение
             Console.WriteLine("Введите y:");
             y = Fill_x(usb.Count);//проверка на нормальное хождение
+            if (usb.points[x, y] != Point.Empty)
+            {
+                Console.WriteLine("Туда нельзя");
+                User_Turn();
+            }
             string ti = Compare(x, y, true).Result;//смотрим результат хождения 
             if (ti == "Miss") Bot_Turn();
-            else User_Turn();  
+            else User_Turn();
         }
         public void Bot_Turn() //ход бота
         {
             Bot bot = Bot.getInstance();
             var ti = bot.Shoot(Boards.First(b => b.Name == "BotBoardPlay")); // даем боту походить
             string res = Compare(ti.X, ti.Y, false).Result;//смотрим результат хождения 
-            if (res == "Miss") User_Turn(); 
+            if (res == "Miss") User_Turn();
             else Bot_Turn();
         }
-        public TurnInfo Compare(int x, int y, bool is_user)
+        private TurnInfo Compare(int x, int y, bool is_user)
         {
             //берем нужные доски в зависимости от того кто ходит
             Board board;
             Board boardPlay;
-            if (is_user) 
+            if (is_user)
             {
-                 board = Boards.First(b => b.Name == "BotBoard");
-                 boardPlay = Boards.First(b => b.Name == "UserBoardPlay");
+                board = Boards.First(b => b.Name == "BotBoard");
+                boardPlay = Boards.First(b => b.Name == "UserBoardPlay");
             }
             else
             {
-                 board = Boards.First(b => b.Name == "UserBoard");
-                 boardPlay = Boards.First(b => b.Name == "BotBoardPlay");
+                board = Boards.First(b => b.Name == "UserBoard");
+                boardPlay = Boards.First(b => b.Name == "BotBoardPlay");
             }
             TurnInfo ti = new TurnInfo();
             ti.X = x;
@@ -73,7 +78,8 @@ namespace lab2_00P_Osad.Observer
                     ti.Result = "wound";
                     boardPlay.points[x, y] = Point.Wounded;
                 }
-                else {
+                else
+                {
                     ti.Result = "kill";
                 }
             }
@@ -84,7 +90,7 @@ namespace lab2_00P_Osad.Observer
             Finish(board, boardPlay); //проверяем на окончание игры
             return ti;
         }
-        public bool Is_alive(int x, int y, Board board, Board boardPlay) 
+        private bool Is_alive(int x, int y, Board board, Board boardPlay)
         {
             //корабль горизонтальный?
             if ((x - 1 >= 0 && board.points[x - 1, y] != Point.Empty) || (x + 1 < board.Count && board.points[x + 1, y] != Point.Empty))
@@ -102,13 +108,13 @@ namespace lab2_00P_Osad.Observer
                 return false; //dead
             }
         }
-        public bool Check(int x, int y, bool is_verticl, Board board, Board boardPlay)
+        private bool Check(int x, int y, bool is_verticl, Board board, Board boardPlay)
         {
             int currxminus = x, curryminus = y;
             int currxplus = x, curryplus = y;
             if (is_verticl) //вертикальный
             {
-                for(int i = x - 1 ; i >= 0; i--) //спускаемся вниз по кораблю
+                for (int i = x - 1; i >= 0; i--) //спускаемся вниз по кораблю
                 {
                     if (board.points[i, y] == Point.ALive && boardPlay.points[i, y] == Point.Empty) //проверяем может он не убит
                     {
@@ -121,7 +127,7 @@ namespace lab2_00P_Osad.Observer
                     }
                     else if (board.points[i, y] == Point.Empty) break; // он закончился тогда заканчиваем
                 }
-                for(int i = x + 1; i < board.Count; i++) // поднимаемся вверх по кораблю
+                for (int i = x + 1; i < board.Count; i++) // поднимаемся вверх по кораблю
                 {
                     if (board.points[i, y] != Point.Empty && boardPlay.points[i, y] == Point.Empty)//проверяем может он не убит
                     {
@@ -178,12 +184,12 @@ namespace lab2_00P_Osad.Observer
         }
 
 
-        public static void DoNotPush(int x, int y, bool is_one,  Board board,  int x1, int y1) 
+        private static void DoNotPush(int x, int y, bool is_one, Board board, int x1, int y1)
         {
             //отмечаем места куда ходить нельзя вокруг метрвого корабля
             if (is_one)//однопалубный кораблик
             {
-                for(int i = x - 1; i <= x + 1; i++)
+                for (int i = x - 1; i <= x + 1; i++)
                 {
                     for (int j = y - 1; j <= y + 1; j++)
                     {
@@ -194,7 +200,7 @@ namespace lab2_00P_Osad.Observer
             }
             else
             {
-                if(x == x1) //горизонтальный кораблик
+                if (x == x1) //горизонтальный кораблик
                 {
                     for (int i = x - 1; i <= x + 1; i++)
                     {
@@ -218,7 +224,7 @@ namespace lab2_00P_Osad.Observer
                 }
             }
         }
-        public static int Fill_x(int n) //ход игрока
+        private static int Fill_x(int n) //ход игрока
         {
             try
             {
@@ -237,14 +243,14 @@ namespace lab2_00P_Osad.Observer
             }
             return -1;
         }
-        
-         IDisposable IObservable<bool>.Subscribe(IObserver<bool> observer)
+
+        IDisposable IObservable<bool>.Subscribe(IObserver<bool> observer)
         {
             if (!observers.Contains(observer))
                 observers.Add(observer);
             return null;
         }
-        
+
 
         IDisposable IObservable<TurnInfo>.Subscribe(IObserver<TurnInfo> observer)
         {
@@ -253,22 +259,22 @@ namespace lab2_00P_Osad.Observer
             return null;
         }
 
-        public void Finish(Board board, Board boardplay)
+        private void Finish(Board board, Board boardplay)
         {
             //окончание игры: если все живые клеточки у противника отмечены как мертвые на игральной доске тогда сообщаем подписчикам о конце игры
             for (int i = 0; i < board.Count; i++)
-                for(int j = 0; j < board.Count; j++)
+                for (int j = 0; j < board.Count; j++)
                 {
                     if (board.points[i, j] == Point.ALive && boardplay.points[i, j] != Point.Dead)
                         return;
                 }
-            if(!board.is_bot)
+            if (!board.is_bot)
                 foreach (var obs in observers)
-                 obs.OnNext(false);
+                    obs.OnNext(false);
             else
                 foreach (var obs in observers)
                     obs.OnNext(true);
             Console.ReadLine();
-        } 
+        }
     }
 }

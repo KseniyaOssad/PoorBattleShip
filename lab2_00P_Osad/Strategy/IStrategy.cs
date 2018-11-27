@@ -10,6 +10,6 @@ namespace lab2_00P_Osad.Strategy
 {
     public interface IStrategy
     {
-        TurnInfo Shoot(Board board); 
+        TurnInfo Shoot(Board board);
     }
 }
