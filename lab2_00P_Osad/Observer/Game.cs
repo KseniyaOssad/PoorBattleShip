@@ -233,15 +233,14 @@ namespace lab2_00P_Osad.Observer
                 else
                 {
                     Console.WriteLine("Число вне доски, try again)");
-                    Fill_x(n);
+                    return Fill_x(n);
                 }
             }
             catch (FormatException)
             {
                 Console.WriteLine("Это ж вроде как не число -_- ");
-                Fill_x(n);
+                return Fill_x(n);
             }
-            return -1;
         }
 
         IDisposable IObservable<bool>.Subscribe(IObserver<bool> observer)
